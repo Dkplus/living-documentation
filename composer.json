@@ -1,0 +1,33 @@
+{
+    "name": "dkplus/living-docs",
+    "description": "Living Docs compiler",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oskar Bley",
+            "email": "oskar@programming-php.net"
+        }
+    ],
+    "bin": [
+        "bin/dkplus"
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Dkplus\\LivingDocs\\": "src"
+        }
+    },
+    "require": {
+        "behat/gherkin": "^4.4",
+        "symfony/finder": "^2.7",
+        "twig/twig": "^2.0",
+        "michelf/php-markdown": "^1.7",
+        "roave/better-reflection": "^1.2",
+        "beberlei/assert": "^2.7",
+        "symfony/console": "^3.2"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0"
+    }
+}

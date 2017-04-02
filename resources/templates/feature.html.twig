@@ -1,0 +1,21 @@
+<div class="card section scrollspy" id="{{ feature|slugifyFeature }}">
+    <div class="card-content">
+        <span class="card-title">{{ feature.title }}</span>
+        {{ feature.description|markdown|raw }}
+
+        {% if feature.background %}
+            Hintergrund:
+            <p>
+                {% for step in feature.background.steps %}
+                {{ step.keyword }} {{ step.text }}<br />
+                {% endfor %}
+            </p>
+        {% endif %}
+
+        <ul class="collection">
+            {% for scenario in scenarios %}
+                {{ scenario|raw }}
+            {% endfor %}
+        </ul>
+    </div>
+</div>

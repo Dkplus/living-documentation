@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+use Dkplus\LivingDocs\Console\ConsoleApplication;
+
+$autoloadFiles = [__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../autoload.php'];
+$loaded = false;
+foreach ($autoloadFiles as $autoloadFile) {
+    if (file_exists($autoloadFile)) {
+        require_once $autoloadFile;
+        $loaded = true;
+        break;
+    }
+}
+if (! $loaded) {
+    throw new RuntimeException('An autoloader could not be detected: did you install this package via composer?');
+}
+
+return (new ConsoleApplication())->run();

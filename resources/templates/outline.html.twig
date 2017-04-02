@@ -1,0 +1,8 @@
+<li class="collection-item avatar">
+    <span class="title" style="font-weight: bold;">{{ outline.title }}</span>
+    <p>
+        {% for step in outline.steps %}
+            {{ step.keyword }} {{ step.text }} <br />
+        {% endfor %}
+    </p>
+</li>

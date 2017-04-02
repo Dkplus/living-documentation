@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{# @var tour \Dkplus\LivingDocs\Sightseeing #}
+{% block body %}
+    <h1>{{ tour.name }}</h1>
+
+    <p>{{ tour.description }}</p>
+
+    {% for poi in tour.pointsOfInterest %}
+        <h2>{{ poi.name }}</h2>
+
+        <p>{{ poi.description }}</p>
+
+        {{ poi.codeName }} ({{ poi.fileName }})
+        <pre>
+            <code lang="php">
+{{ poi.code }}
+            </code>
+        </pre>
+    {% endfor %}
+{% endblock %}

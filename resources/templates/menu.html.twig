@@ -1,0 +1,20 @@
+{% if item.children|length > 0 %}
+    <li {% if item.active %}class="active"{% endif %}>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header">{{ item.label }}<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        {% for child in children %}
+                            {% include 'menu.html.twig' with {item: child} %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+{% else %}
+    <li {% if item.active %}class="active"{% endif %}>
+        <a href="{{ item.link }}">{{ item.label }}</a>
+    </li>
+{% endif %}
