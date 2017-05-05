@@ -1,0 +1,29 @@
+source code:
+    annotations: true
+    directories: [src]
+
+twig:
+    template_dir: resources/templates/materialize
+
+pages:
+    sightseeing.glossary:
+        type: glossary
+        title: Glossary
+    sightseeing.tours.test:
+        type: sightseeing
+        definition: docs/sightseeing.php
+    sightseeing.tours.diagram:
+        type: class_diagram
+        definition: docs/class_diagram.php
+
+exports:
+    Developer documentation:
+        renderer: twig
+        target: build/developer
+        pages:
+            - sightseeing.*
+        menu:
+            Sightseeing:
+                page: sightseeing.glossary
+                children:
+                    - sightseeing.*

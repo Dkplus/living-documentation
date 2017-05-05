@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="dkplus.twig.twig_page_renderer" class="Dkplus\LivingDocs\TwigExtension\TwigPageRenderer">
+            <argument type="service" id="dkplus.twig.twig"/>
+            <argument type="service" id="dkplus.twig.path_resolver" />
+            <tag name="dkplus.export.page_renderer" id="twig"/>
+        </service>
+
+        <service id="dkplus.twig.twig" class="Twig_Environment">
+            <argument type="service" id="dkplus.twig.twig_loader"/>
+            <call method="addExtension">
+                <argument type="service" id="dkplus.twig.path_resolve_twig_extension" />
+            </call>
+        </service>
+
+        <service id="dkplus.twig.twig_loader" class="Twig_Loader_Filesystem">
+            <argument type="collection">
+                <argument>%twig.template_dir%</argument>
+            </argument>
+        </service>
+
+        <service id="dkplus.twig.path_resolve_twig_extension"
+                 class="Dkplus\LivingDocs\TwigExtension\PathResolverTwigExtension">
+            <argument type="service" id="dkplus.twig.path_resolver" />
+        </service>
+        <service id="dkplus.twig.path_resolver" class="Dkplus\LivingDocs\TwigExtension\PathResolver">
+            <argument type="service" id="dkplus.core.relative_path" />
+        </service>
+    </services>
+</container>

@@ -2,19 +2,30 @@
 <?php
 declare(strict_types=1);
 
-use Dkplus\LivingDocs\Console\ConsoleApplication;
+use Dkplus\LivingDocs\Extension\ApplicationFactory;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
-$autoloadFiles = [__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../autoload.php'];
-$loaded = false;
+$autoloadFiles = [
+    getcwd() . '/vendor/autoload.php',
+    getcwd() . '/../vendor/autoload.php',
+    getcwd() . '/../../../autoload.php',
+];
+$loader = null;
 foreach ($autoloadFiles as $autoloadFile) {
     if (file_exists($autoloadFile)) {
-        require_once $autoloadFile;
-        $loaded = true;
+        $loader = require($autoloadFile);
         break;
     }
 }
-if (! $loaded) {
-    throw new RuntimeException('An autoloader could not be detected: did you install this package via composer?');
+if (! $loader || ! class_exists(ApplicationFactory::class, true)) {
+    fwrite(STDERR,
+        'You must set up the project dependencies, run the following commands:' . PHP_EOL .
+        'curl -s http://getcomposer.org/installer | php' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+    exit(1);
 }
+AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
-return (new ConsoleApplication())->run();
+$factory = new ApplicationFactory();
+return $factory->createApplication()->run();

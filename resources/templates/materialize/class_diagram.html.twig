@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.rawgit.com/clientIO/joint/master/dist/joint.min.css" />
+{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    <canvas id="nomnoml-canvas"></canvas>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/3.7.0/lodash.min.js"></script>
+    <script type="text/javascript" src="http://www.samsarin.com/project/dagre/v0.4.6/dagre.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/skanaar/nomnoml/d852a533fa085b7b178726b073276521840bf9e5/dist/nomnoml.js"></script>
+    <script>
+        var source = "#.interface: dashed italic\n";
+        {% if diagram.packages|length > 0 %}
+            {% for package in diagram.packages %}
+                {% if package is not empty %}
+                    source += "[<package> {{ package|replace({"\\": "\\\\"}) }}|\n";
+                {% endif %}
+                {% for class in diagram.externalActors(package) %}
+                    source += "[<actor> {{ class|replace({"\\": "\\\\"}) }}]\n";
+                {% endfor %}
+                {% for class in diagram.interfaces(package) %}
+                    source += "[<interface> {{ class|replace({"\\": "\\\\"}) }}]\n";
+                {% endfor %}
+                {% for class in diagram.abstractClasses(package) %}
+                    source += "[<abstract> {{ class|replace({"\\": "\\\\"}) }}]\n";
+                {% endfor %}
+                {% for class in diagram.classes(package) %}
+                    source += "[{{ class|replace({"\\": "\\\\"}) }}]\n";
+                {% endfor %}
+                {% if package is not empty %}
+                    source += "]\n";
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {% for class in diagram.externalActors %}
+                source += "[<actor> {{ class|replace({"\\": "\\\\"}) }}]\n";
+            {% endfor %}
+            {% for class in diagram.interfaces %}
+                source += "[<interface> {{ class|replace({"\\": "\\\\"}) }}]\n";
+            {% endfor %}
+            {% for class in diagram.abstractClasses %}
+                source += "[<abstract> {{ class|replace({"\\": "\\\\"}) }}]\n";
+            {% endfor %}
+            {% for class in diagram.classes %}
+                source += "[{{ class|replace({"\\": "\\\\"}) }}]\n";
+            {% endfor %}
+            {% for class in diagram.allClasses %}
+                {% for dependency,labels in diagram.dependencies(class) %}
+                    {% for label in labels %}
+                        source += "[{{ class|replace({"\\": "\\\\"}) }}] --> {{ label }} [{{ dependency|replace({"\\": "\\\\"}) }}]\n";
+                    {% endfor %}
+                {% endfor %}
+                {% for association,multiply in diagram.associations(class) %}
+                    source += "[{{ class|replace({"\\": "\\\\"}) }}] -> {{ multiply }} [{{ association|replace({"\\": "\\\\"}) }}]\n";
+                {% endfor %}
+                {% for implementedClass in diagram.implementations(class) %}
+                    source += "[{{ class|replace({"\\": "\\\\"}) }}] --:> [{{ implementedClass|replace({"\\": "\\\\"}) }}]\n";
+                {% endfor %}
+                {% for extendedClass in diagram.generalizations(class) %}
+                    source += "[{{ class|replace({"\\": "\\\\"}) }}] -:> [{{ extendedClass|replace({"\\": "\\\\"}) }}]\n";
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        console.log(source);
+        nomnoml.draw(document.getElementById('nomnoml-canvas'), source);
+    </script>
+{% endblock %}

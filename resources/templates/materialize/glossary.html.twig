@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    <ul class="collection">
+        {% for name, description in items %}
+            <li class="collection-item">
+                <span class="title">{{ name }}</span>
+                <p>{{ description }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

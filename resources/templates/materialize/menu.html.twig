@@ -1,0 +1,21 @@
+{% set active = is_active_page(item) %}
+{% if item.children|length > 0 %}
+    <li {% if active %}class="active"{% endif %}>
+        <ul class="collapsible collapsible-accordion">
+            <li {% if active %}class="active"{% endif %}>
+                <a class="collapsible-header {% if active %}active{% endif %}" {% if item.hasPageId %}href="{{ path(item.pageId) }}"{% endif %}>{{ item.label }}<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        {% for child in item.children %}
+                            {% include 'menu.html.twig' with {item: child} %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+{% else %}
+    <li {% if active %}class="active"{% endif %}>
+        <a href="{{ path(item.pageId) }}">{{ item.label }}</a>
+    </li>
+{% endif %}
