@@ -21,6 +21,10 @@ class SightseeingPageProcessor implements PageProcessor
         $this->codeResolver = $codeResolver;
     }
 
+    public function preProcess(Page $page): void
+    {
+    }
+
     public function process(Page $page): ProcessedPage
     {
         if (! $page instanceof SightseeingPage) {

@@ -9,6 +9,7 @@ use function array_combine;
 use function array_keys;
 use function array_map;
 use function array_walk;
+use function iterator_to_array;
 use function var_dump;
 
 class Export
@@ -44,7 +45,7 @@ class Export
     public function render(ProcessedPages $pages, PageRenderer $renderer): array
     {
         $pages = $pages->matching($this->pages);
-        $renderer->start($pages->ids());
+        $renderer->start(iterator_to_array($pages));
         foreach ($pages as $id => $page) {
             $renderer->render($id, $page, array_merge($this->extra, ['menu' => $this->menu($pages)]));
         }

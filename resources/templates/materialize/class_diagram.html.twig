@@ -1,21 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="https://cdn.rawgit.com/clientIO/joint/master/dist/joint.min.css" />
-{% endblock %}
-
 {% block body %}
     <h1>{{ title }}</h1>
     <canvas id="nomnoml-canvas"></canvas>
-{% endblock %}
-
-{% block javascript %}
-    {{ parent() }}
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/3.7.0/lodash.min.js"></script>
-    <script type="text/javascript" src="http://www.samsarin.com/project/dagre/v0.4.6/dagre.min.js"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/skanaar/nomnoml/d852a533fa085b7b178726b073276521840bf9e5/dist/nomnoml.js"></script>
     <script>
+        $(function () {
         var source = "#.interface: dashed italic\n";
         {% if diagram.packages|length > 0 %}
             {% for package in diagram.packages %}
@@ -68,7 +57,7 @@
                 {% endfor %}
             {% endfor %}
         {% endif %}
-        console.log(source);
         nomnoml.draw(document.getElementById('nomnoml-canvas'), source);
+        });
     </script>
 {% endblock %}

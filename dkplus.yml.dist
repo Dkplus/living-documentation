@@ -15,6 +15,10 @@ pages:
     sightseeing.tours.diagram:
         type: class_diagram
         definition: docs/class_diagram.php
+    sightseeing.tours.markdown:
+        type: markdown
+        title: Markdown test
+        source: docs/Markdown.md
 
 exports:
     Developer documentation:

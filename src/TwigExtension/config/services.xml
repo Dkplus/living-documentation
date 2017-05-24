@@ -6,14 +6,17 @@
         <service id="dkplus.twig.twig_page_renderer" class="Dkplus\LivingDocs\TwigExtension\TwigPageRenderer">
             <argument type="service" id="dkplus.twig.twig"/>
             <argument type="service" id="dkplus.twig.path_resolver" />
+            <call method="addTwigExtension">
+                <argument type="service" id="dkplus.twig.path_resolve_twig_extension" />
+            </call>
+            <call method="addTwigExtension">
+                <argument type="service" id="dkplus.markdown.twig_extension" />
+            </call>
             <tag name="dkplus.export.page_renderer" id="twig"/>
         </service>
 
         <service id="dkplus.twig.twig" class="Twig_Environment">
             <argument type="service" id="dkplus.twig.twig_loader"/>
-            <call method="addExtension">
-                <argument type="service" id="dkplus.twig.path_resolve_twig_extension" />
-            </call>
         </service>
 
         <service id="dkplus.twig.twig_loader" class="Twig_Loader_Filesystem">

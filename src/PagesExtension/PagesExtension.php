@@ -13,7 +13,6 @@ use Symfony\Component\DependencyInjection\Reference;
 use function array_diff_key;
 use function array_keys;
 use function implode;
-use function var_dump;
 
 class PagesExtension implements Extension
 {
@@ -23,6 +22,7 @@ class PagesExtension implements Extension
     public function process(ContainerBuilder $container): void
     {
         $processingStep = $container->getDefinition('dkplus.pages.processing');
+        $preProcessingStep = $container->getDefinition('dkplus.pages.pre_processing');
 
         /* @var $processors array[] */
         $processors = $container->findTaggedServiceIds('dkplus.pages.processor');
@@ -66,6 +66,10 @@ class PagesExtension implements Extension
                 }
                 $processorId = $processorIdsByType[$pageType];
 
+                $preProcessingStep->addMethodCall(
+                    'addPage',
+                    [$eachAttributes['page_id'], new Reference($eachId), new Reference($processorId)]
+                );
                 $processingStep->addMethodCall(
                     'addPage',
                     [$eachAttributes['page_id'], new Reference($eachId), new Reference($processorId)]
@@ -130,8 +134,8 @@ class PagesExtension implements Extension
         foreach ($config as $eachId => $eachPage) {
             $pageType = $this->pageTypes[$eachPage['type']];
             $definitions['dkplus.pages._' . $eachId] = $pageType
-                    ->createPageDefinition($eachPage['attributes'])
-                    ->addTag('dkplus.pages.page', ['page_type' => $eachPage['type'], 'page_id' => $eachId]);
+                ->createPageDefinition($eachPage['attributes'])
+                ->addTag('dkplus.pages.page', ['page_type' => $eachPage['type'], 'page_id' => $eachId]);
         }
         $container->addDefinitions($definitions);
     }

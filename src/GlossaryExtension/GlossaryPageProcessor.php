@@ -28,6 +28,10 @@ class GlossaryPageProcessor implements PageProcessor, AnnotationSubscriber
         $this->coreConcepts[$class->getShortName()] = $concept;
     }
 
+    public function preProcess(Page $page): void
+    {
+    }
+
     public function process(Page $page): ProcessedPage
     {
         /* @var $page GlossaryPage */

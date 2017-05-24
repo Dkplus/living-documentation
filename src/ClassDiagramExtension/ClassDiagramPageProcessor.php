@@ -30,6 +30,9 @@ class ClassDiagramPageProcessor implements PageProcessor, AnnotationSubscriber
     private $packages;
 
     /** @var string[] */
+    private $classesToLookFor = [];
+
+    /** @var string[] */
     private $creations = [];
 
     public function __construct(ClassDependencies $dependencies, Packages $packages)
@@ -48,13 +51,29 @@ class ClassDiagramPageProcessor implements PageProcessor, AnnotationSubscriber
 
     public function notifyAboutFactoryMethod(FactoryMethod $annotation, ReflectionMethod $method): void
     {
+        $className = $method->getDeclaringClass()->getName();
         if (! $method->getReturnType()
             || $method->getReturnType()->isBuiltin()
+            || ! in_array($className, $this->classesToLookFor)
         ) {
             return;
         }
 
-        $this->creations[$method->getDeclaringClass()->getName()][] = (string) $method->getReturnType();
+        $this->creations[$className][] = (string) $method->getReturnType();
+    }
+
+    public function preProcess(Page $page): void
+    {
+        if (! $page instanceof ClassDiagramPage) {
+            throw new InvalidArgumentException(get_class($page));
+        }
+
+        $definition = include $page->getDefinitionPath();
+        if (! $definition instanceof ClassDiagramDescription) {
+            throw new InvalidArgumentException(is_object($definition) ? get_class($definition) : gettype($definition));
+        }
+
+        $this->classesToLookFor = array_merge($this->classesToLookFor, $definition->getClasses());
     }
 
     public function process(Page $page): ProcessedPage

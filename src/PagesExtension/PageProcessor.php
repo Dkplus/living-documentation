@@ -5,5 +5,6 @@ namespace Dkplus\LivingDocs\PagesExtension;
 
 interface PageProcessor
 {
+    public function preProcess(Page $page): void;
     public function process(Page $page): ProcessedPage;
 }

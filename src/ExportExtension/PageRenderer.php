@@ -7,7 +7,7 @@ use Dkplus\LivingDocs\PagesExtension\ProcessedPage;
 
 interface PageRenderer
 {
-    public function start(array $pageIds): void;
+    public function start(array $pages): void;
     public function render(string $id, ProcessedPage $page, array $extra): void;
     public function finish(): array;
 }

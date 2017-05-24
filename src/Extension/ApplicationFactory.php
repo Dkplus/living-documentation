@@ -6,6 +6,7 @@ namespace Dkplus\LivingDocs\Extension;
 use Dkplus\LivingDocs\ClassDiagramExtension\ClassDiagramExtension;
 use Dkplus\LivingDocs\ExportExtension\ExportExtension;
 use Dkplus\LivingDocs\GlossaryExtension\GlossaryExtension;
+use Dkplus\LivingDocs\MarkdownExtension\MarkdownExtension;
 use Dkplus\LivingDocs\PagesExtension\PagesExtension;
 use Dkplus\LivingDocs\SightseeingExtension\SightseeingExtension;
 use Dkplus\LivingDocs\SourceCodeExtension\SourceCodeExtension;
@@ -57,6 +58,7 @@ class ApplicationFactory
             new GlossaryExtension(),
             new SightseeingExtension(),
             new ClassDiagramExtension(),
+            new MarkdownExtension(),
         ];
     }
 }
