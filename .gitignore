@@ -1,4 +1,4 @@
 /vendor
 /composer.lock
-/example-specs
-/build
+/build/*
+!/build/phpcs

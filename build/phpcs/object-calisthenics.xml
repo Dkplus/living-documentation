@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="ObjectCalisthenics">
+    <rule ref="../../vendor/object-calisthenics/phpcs-calisthenics-rules/src/ObjectCalisthenics/ruleset.xml" />
+    <!-- Allow public properties for projections -->
+    <rule ref="ObjectCalisthenics.Classes.ForbiddenPublicProperty">
+        <exclude-pattern>*Projection.php</exclude-pattern>
+        <exclude-pattern>*View.php</exclude-pattern>
+    </rule>
+    <!-- Allow fluent interfaces -->
+    <rule ref="ObjectCalisthenics.CodeAnalysis.OneObjectOperatorPerLine">
+        <properties>
+            <property name="variablesHoldingAFluentInterface" type="array" value=""/>
+            <property name="methodsStartingAFluentInterface" type="array" value=""/>
+            <property name="methodsEndingAFluentInterface" type="array" value=""/>
+        </properties>
+    </rule>
+</ruleset>
