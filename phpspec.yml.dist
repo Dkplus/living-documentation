@@ -1,0 +1,5 @@
+suites:
+    dkplus_suite:
+        namespace: Dkplus\LivingDocumentation
+        psr4_prefix: Dkplus\LivingDocumentation
+
