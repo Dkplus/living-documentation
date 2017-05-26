@@ -1,12 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\ClassDiagramExtension;
+namespace Dkplus\LivingDocumentation\ClassDiagramExtension;
 
 use Assert\Assert;
-use Dkplus\LivingDocs\SightseeingExtension\ClassPointOfInterestDescription;
-use Dkplus\LivingDocs\SightseeingExtension\PointOfInterest;
-use Dkplus\LivingDocs\SightseeingExtension\PointOfInterestDescription;
 use InvalidArgumentException;
 use const ARRAY_FILTER_USE_BOTH;
 use function array_combine;
@@ -21,7 +18,6 @@ use function array_values;
 use function explode;
 use function implode;
 use function in_array;
-use function var_dump;
 
 class ClassDiagram
 {

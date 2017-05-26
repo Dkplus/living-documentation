@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\TwigExtension;
+namespace Dkplus\LivingDocumentation\TwigExtension;
 
 use function array_merge;
-use Dkplus\LivingDocs\ExportExtension\PageRenderer;
-use Dkplus\LivingDocs\PagesExtension\ProcessedPage;
+use Dkplus\LivingDocumentation\ExportExtension\PageRenderer;
+use Dkplus\LivingDocumentation\PagesExtension\ProcessedPage;
 use InvalidArgumentException;
 use function method_exists;
 use Twig_Environment;

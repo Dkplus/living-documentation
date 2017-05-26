@@ -3,7 +3,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="dkplus.source_code.processing" class="Dkplus\LivingDocs\SourceCodeExtension\SourceCodeProcessing">
+        <service id="dkplus.source_code.processing" class="Dkplus\LivingDocumentation\SourceCodeExtension\SourceCodeProcessing">
             <argument>%source_code.directories%</argument>
             <argument type="service" id="dkplus.source_code.class_finder"/>
             <argument type="service" id="dkplus.source_code.code_iterator"/>
@@ -12,28 +12,28 @@
         </service>
 
         <service id="dkplus.source_code.class_finder"
-                 class="Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing\CodeTraverser">
+                 class="Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing\CodeTraverser">
             <argument type="service" id="dkplus.source_code.classes"/>
             <argument type="service" id="dkplus.source_code.packages"/>
             <argument type="service" id="dkplus.source_code.dependencies" />
         </service>
 
         <service id="dkplus.source_code.classes"
-                 class="Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing\ClassCollectingVisitor"/>
+                 class="Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing\ClassCollectingVisitor"/>
         <service id="dkplus.source_code.packages"
-                 class="Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing\PackageCollectingVisitor"/>
+                 class="Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing\PackageCollectingVisitor"/>
         <service id="dkplus.source_code.dependencies"
-                 class="Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing\ClassDependencyCollectingVisitor"/>
+                 class="Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing\ClassDependencyCollectingVisitor"/>
 
-        <service id="dkplus.source_code.code_resolver" class="Dkplus\LivingDocs\SourceCodeExtension\SimpleCodeResolver">
+        <service id="dkplus.source_code.code_resolver" class="Dkplus\LivingDocumentation\SourceCodeExtension\SimpleCodeResolver">
             <argument>%source_code.directories%</argument>
             <argument type="service" id="dkplus.core.relative_path" />
         </service>
 
-        <service id="dkplus.source_code.code_iterator" class="Dkplus\LivingDocs\SourceCodeExtension\CodeIterator"/>
+        <service id="dkplus.source_code.code_iterator" class="Dkplus\LivingDocumentation\SourceCodeExtension\CodeIterator"/>
 
         <service id="dkplus.source_code.annotation_iterator"
-                 class="Dkplus\LivingDocs\SourceCodeExtension\AnnotationIterator">
+                 class="Dkplus\LivingDocumentation\SourceCodeExtension\AnnotationIterator">
             <argument type="service" id="dkplus.source_code.annotation_reader"/>
         </service>
         <service id="dkplus.source_code.annotation_reader" class="Doctrine\Common\Annotations\AnnotationReader"/>

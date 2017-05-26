@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\Gherkin;
+namespace Dkplus\LivingDocumentation\Gherkin;
 
 use Behat\Gherkin\Node\FeatureNode;
 use Behat\Gherkin\Node\OutlineNode;
 use Behat\Gherkin\Node\ScenarioInterface;
 use Behat\Gherkin\Node\ScenarioNode;
-use Dkplus\LivingDocs\Rendering\SinglePage;
+use Dkplus\LivingDocumentation\Rendering\SinglePage;
 use Exception;
 use Michelf\Markdown;
 use Twig_Environment;

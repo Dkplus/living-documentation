@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing;
+namespace Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing;
 
-use Dkplus\LivingDocs\SourceCodeExtension\ClassDependencies;
+use Dkplus\LivingDocumentation\SourceCodeExtension\ClassDependencies;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Name\FullyQualified;

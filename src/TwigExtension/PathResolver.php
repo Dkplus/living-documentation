@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\TwigExtension;
+namespace Dkplus\LivingDocumentation\TwigExtension;
 
-use Dkplus\LivingDocs\ExportExtension\MenuItem;
-use Dkplus\LivingDocs\Extension\RelativePathCalculator;
+use Dkplus\LivingDocumentation\ExportExtension\MenuItem;
+use Dkplus\LivingDocumentation\Extension\RelativePathCalculator;
 use RuntimeException;
 use function in_array;
 

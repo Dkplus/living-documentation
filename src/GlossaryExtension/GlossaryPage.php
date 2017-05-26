@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\GlossaryExtension;
+namespace Dkplus\LivingDocumentation\GlossaryExtension;
 
-use Dkplus\LivingDocs\PagesExtension\Page;
+use Dkplus\LivingDocumentation\PagesExtension\Page;
 
 class GlossaryPage implements Page
 {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\PagesExtension;
+namespace Dkplus\LivingDocumentation\PagesExtension;
 
-use Dkplus\LivingDocs\Extension\Extension;
+use Dkplus\LivingDocumentation\Extension\Extension;
 use RuntimeException;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\FileLocator;

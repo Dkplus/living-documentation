@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SightseeingExtension;
+namespace Dkplus\LivingDocumentation\SightseeingExtension;
 
-use Dkplus\LivingDocs\Annotation\CoreConcept;
+use Dkplus\LivingDocumentation\Annotation\CoreConcept;
 
 /**
  * A point of interest is one code snippet that is interesting for the user within a tour.

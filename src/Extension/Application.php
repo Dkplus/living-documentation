@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\Extension;
+namespace Dkplus\LivingDocumentation\Extension;
 
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Command\Command;
@@ -71,12 +71,11 @@ class Application extends BaseApplication
         $container->set('cli.input', $input);
         $container->set('cli.output', $output);
 
-        $extension = new ContainerLoader($this->extensionManager);
-        $extension->load(
-            $container,
-            $input->hasParameterOption(['--help', '-h']) ? [] : $this->configLoader->loadConfiguration()
-        );
-        $container->addObjectResource($extension);
+        if (! $input->hasParameterOption(['--help', '-h'])) {
+            $extension = new ContainerLoader($this->extensionManager);
+            $extension->load($container, $this->configLoader->loadConfiguration());
+            $container->addObjectResource($extension);
+        }
         $container->compile();
         return $container;
     }

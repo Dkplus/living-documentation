@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SightseeingExtension;
+namespace Dkplus\LivingDocumentation\SightseeingExtension;
 
 use Assert\Assert;
-use Dkplus\LivingDocs\SourceCodeExtension\CodeResolver;
+use Dkplus\LivingDocumentation\SourceCodeExtension\CodeResolver;
 use InvalidArgumentException;
 use function array_map;
 

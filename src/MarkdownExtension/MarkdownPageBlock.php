@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\MarkdownExtension;
+namespace Dkplus\LivingDocumentation\MarkdownExtension;
 
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Cursor;

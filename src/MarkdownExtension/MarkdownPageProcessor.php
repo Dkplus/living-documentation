@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\MarkdownExtension;
+namespace Dkplus\LivingDocumentation\MarkdownExtension;
 
-use Dkplus\LivingDocs\PagesExtension\Page;
-use Dkplus\LivingDocs\PagesExtension\PageProcessor;
-use Dkplus\LivingDocs\PagesExtension\ProcessedPage;
+use Dkplus\LivingDocumentation\PagesExtension\Page;
+use Dkplus\LivingDocumentation\PagesExtension\PageProcessor;
+use Dkplus\LivingDocumentation\PagesExtension\ProcessedPage;
 use InvalidArgumentException;
 use function get_class;
 

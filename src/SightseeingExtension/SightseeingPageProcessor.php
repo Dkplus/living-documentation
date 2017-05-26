@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SightseeingExtension;
+namespace Dkplus\LivingDocumentation\SightseeingExtension;
 
-use Dkplus\LivingDocs\PagesExtension\Page;
-use Dkplus\LivingDocs\PagesExtension\PageProcessor;
-use Dkplus\LivingDocs\PagesExtension\ProcessedPage;
-use Dkplus\LivingDocs\SourceCodeExtension\CodeResolver;
+use Dkplus\LivingDocumentation\PagesExtension\Page;
+use Dkplus\LivingDocumentation\PagesExtension\PageProcessor;
+use Dkplus\LivingDocumentation\PagesExtension\ProcessedPage;
+use Dkplus\LivingDocumentation\SourceCodeExtension\CodeResolver;
 use InvalidArgumentException;
 use RuntimeException;
 use function get_class;

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\ClassDiagramExtension;
+namespace Dkplus\LivingDocumentation\ClassDiagramExtension;
 
 use RuntimeException;
 use function array_filter;

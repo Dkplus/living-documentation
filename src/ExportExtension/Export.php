@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\ExportExtension;
+namespace Dkplus\LivingDocumentation\ExportExtension;
 
-use Dkplus\LivingDocs\PagesExtension\ProcessedPage;
-use Dkplus\LivingDocs\PagesExtension\ProcessedPages;
+use Dkplus\LivingDocumentation\PagesExtension\ProcessedPage;
+use Dkplus\LivingDocumentation\PagesExtension\ProcessedPages;
 use function array_combine;
 use function array_keys;
 use function array_map;

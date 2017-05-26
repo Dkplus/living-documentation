@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\PagesExtension;
+namespace Dkplus\LivingDocumentation\PagesExtension;
 
-use Dkplus\LivingDocs\Extension\ProcessingStep;
+use Dkplus\LivingDocumentation\Extension\ProcessingStep;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

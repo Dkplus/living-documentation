@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\TwigExtension;
+namespace Dkplus\LivingDocumentation\TwigExtension;
 
 use Twig_Extension;
 use Twig_SimpleFunction;

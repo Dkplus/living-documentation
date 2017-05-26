@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\ClassDiagramExtension;
+namespace Dkplus\LivingDocumentation\ClassDiagramExtension;
 
-use Dkplus\LivingDocs\Extension\Extension;
-use Dkplus\LivingDocs\PagesExtension\PageType;
+use Dkplus\LivingDocumentation\Extension\Extension;
+use Dkplus\LivingDocumentation\PagesExtension\PageType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\ExprBuilder;
 use Symfony\Component\Config\FileLocator;

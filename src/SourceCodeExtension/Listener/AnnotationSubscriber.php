@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SourceCodeExtension\Listener;
+namespace Dkplus\LivingDocumentation\SourceCodeExtension\Listener;
 
-use Dkplus\LivingDocs\SourceCodeExtension\AnnotationListeners;
+use Dkplus\LivingDocumentation\SourceCodeExtension\AnnotationListeners;
 
 interface AnnotationSubscriber
 {

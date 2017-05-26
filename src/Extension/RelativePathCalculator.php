@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\Extension;
+namespace Dkplus\LivingDocumentation\Extension;
 
 use function array_shift;
 use function explode;

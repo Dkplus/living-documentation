@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\ClassDiagramExtension;
+namespace Dkplus\LivingDocumentation\ClassDiagramExtension;
 
-use Dkplus\LivingDocs\PagesExtension\Page;
+use Dkplus\LivingDocumentation\PagesExtension\Page;
 
 class ClassDiagramPage implements Page
 {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing;
+namespace Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing;
 
-use Dkplus\LivingDocs\SourceCodeExtension\Classes;
+use Dkplus\LivingDocumentation\SourceCodeExtension\Classes;
 use PhpParser\Builder\Trait_;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;

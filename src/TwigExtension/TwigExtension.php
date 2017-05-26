@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\TwigExtension;
+namespace Dkplus\LivingDocumentation\TwigExtension;
 
-use Dkplus\LivingDocs\Extension\Extension;
+use Dkplus\LivingDocumentation\Extension\Extension;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SourceCodeExtension;
+namespace Dkplus\LivingDocumentation\SourceCodeExtension;
 
-use Dkplus\LivingDocs\Extension\ProcessingStep;
-use Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing\ClassCollectingVisitor;
-use Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing\CodeTraverser;
+use Dkplus\LivingDocumentation\Extension\ProcessingStep;
+use Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing\ClassCollectingVisitor;
+use Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing\CodeTraverser;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

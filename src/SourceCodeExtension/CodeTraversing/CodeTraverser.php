@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SourceCodeExtension\CodeTraversing;
+namespace Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing;
 
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;

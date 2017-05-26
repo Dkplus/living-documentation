@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\MarkdownExtension;
+namespace Dkplus\LivingDocumentation\MarkdownExtension;
 
-use Dkplus\LivingDocs\PagesExtension\Page;
+use Dkplus\LivingDocumentation\PagesExtension\Page;
 use function file_get_contents;
 
 class MarkdownPage implements Page

@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\Extension;
+namespace Dkplus\LivingDocumentation\Extension;
 
-use Dkplus\LivingDocs\ClassDiagramExtension\ClassDiagramExtension;
-use Dkplus\LivingDocs\ExportExtension\ExportExtension;
-use Dkplus\LivingDocs\GlossaryExtension\GlossaryExtension;
-use Dkplus\LivingDocs\MarkdownExtension\MarkdownExtension;
-use Dkplus\LivingDocs\PagesExtension\PagesExtension;
-use Dkplus\LivingDocs\SightseeingExtension\SightseeingExtension;
-use Dkplus\LivingDocs\SourceCodeExtension\SourceCodeExtension;
-use Dkplus\LivingDocs\TwigExtension\TwigExtension;
+use Dkplus\LivingDocumentation\ClassDiagramExtension\ClassDiagramExtension;
+use Dkplus\LivingDocumentation\ExportExtension\ExportExtension;
+use Dkplus\LivingDocumentation\GlossaryExtension\GlossaryExtension;
+use Dkplus\LivingDocumentation\MarkdownExtension\MarkdownExtension;
+use Dkplus\LivingDocumentation\PagesExtension\PagesExtension;
+use Dkplus\LivingDocumentation\SightseeingExtension\SightseeingExtension;
+use Dkplus\LivingDocumentation\SourceCodeExtension\SourceCodeExtension;
+use Dkplus\LivingDocumentation\TwigExtension\TwigExtension;
 use const DIRECTORY_SEPARATOR;
 use function getcwd;
 

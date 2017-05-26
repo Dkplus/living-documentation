@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\ExportExtension;
+namespace Dkplus\LivingDocumentation\ExportExtension;
 
 use function array_map;
 use RuntimeException;

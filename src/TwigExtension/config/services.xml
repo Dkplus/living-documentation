@@ -3,7 +3,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="dkplus.twig.twig_page_renderer" class="Dkplus\LivingDocs\TwigExtension\TwigPageRenderer">
+        <service id="dkplus.twig.twig_page_renderer" class="Dkplus\LivingDocumentation\TwigExtension\TwigPageRenderer">
             <argument type="service" id="dkplus.twig.twig"/>
             <argument type="service" id="dkplus.twig.path_resolver" />
             <call method="addTwigExtension">
@@ -26,10 +26,10 @@
         </service>
 
         <service id="dkplus.twig.path_resolve_twig_extension"
-                 class="Dkplus\LivingDocs\TwigExtension\PathResolverTwigExtension">
+                 class="Dkplus\LivingDocumentation\TwigExtension\PathResolverTwigExtension">
             <argument type="service" id="dkplus.twig.path_resolver" />
         </service>
-        <service id="dkplus.twig.path_resolver" class="Dkplus\LivingDocs\TwigExtension\PathResolver">
+        <service id="dkplus.twig.path_resolver" class="Dkplus\LivingDocumentation\TwigExtension\PathResolver">
             <argument type="service" id="dkplus.core.relative_path" />
         </service>
     </services>

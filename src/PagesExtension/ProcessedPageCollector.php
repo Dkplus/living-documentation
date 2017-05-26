@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\PagesExtension;
+namespace Dkplus\LivingDocumentation\PagesExtension;
 
 class ProcessedPageCollector extends ArrayProcessedPages
 {

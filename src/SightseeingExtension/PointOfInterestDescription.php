@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SightseeingExtension;
+namespace Dkplus\LivingDocumentation\SightseeingExtension;
 
-use Dkplus\LivingDocs\Annotation\FactoryMethod;
-use Dkplus\LivingDocs\SourceCodeExtension\CodeResolver;
+use Dkplus\LivingDocumentation\Annotation\FactoryMethod;
+use Dkplus\LivingDocumentation\SourceCodeExtension\CodeResolver;
 
 interface PointOfInterestDescription
 {

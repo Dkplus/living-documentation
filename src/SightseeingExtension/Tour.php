@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SightseeingExtension;
+namespace Dkplus\LivingDocumentation\SightseeingExtension;
 
-use Dkplus\LivingDocs\Annotation\CoreConcept;
+use Dkplus\LivingDocumentation\Annotation\CoreConcept;
 
 /**
  * @CoreConcept("A tour guides through some part of the code")

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SourceCodeExtension;
+namespace Dkplus\LivingDocumentation\SourceCodeExtension;
 
-use Dkplus\LivingDocs\Extension\RelativePathCalculator;
+use Dkplus\LivingDocumentation\Extension\RelativePathCalculator;
 use ReflectionClass;
 use ReflectionFunction;
 use RuntimeException;

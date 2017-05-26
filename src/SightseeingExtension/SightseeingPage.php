@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SightseeingExtension;
+namespace Dkplus\LivingDocumentation\SightseeingExtension;
 
-use Dkplus\LivingDocs\PagesExtension\Page;
+use Dkplus\LivingDocumentation\PagesExtension\Page;
 
 class SightseeingPage implements Page
 {

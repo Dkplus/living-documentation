@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\SourceCodeExtension;
+namespace Dkplus\LivingDocumentation\SourceCodeExtension;
 
-use Dkplus\LivingDocs\SourceCodeExtension\Listener\ClassListener;
-use Dkplus\LivingDocs\SourceCodeExtension\Listener\ConstantListener;
-use Dkplus\LivingDocs\SourceCodeExtension\Listener\MethodListener;
-use Dkplus\LivingDocs\SourceCodeExtension\Listener\PropertyListener;
+use Dkplus\LivingDocumentation\SourceCodeExtension\Listener\ClassListener;
+use Dkplus\LivingDocumentation\SourceCodeExtension\Listener\ConstantListener;
+use Dkplus\LivingDocumentation\SourceCodeExtension\Listener\MethodListener;
+use Dkplus\LivingDocumentation\SourceCodeExtension\Listener\PropertyListener;
 use ReflectionClass;
 use function array_walk;
 

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\ExportExtension;
+namespace Dkplus\LivingDocumentation\ExportExtension;
 
-use Dkplus\LivingDocs\Extension\ProcessingStep;
-use Dkplus\LivingDocs\PagesExtension\ProcessedPages;
+use Dkplus\LivingDocumentation\Extension\ProcessingStep;
+use Dkplus\LivingDocumentation\PagesExtension\ProcessedPages;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use function dirname;

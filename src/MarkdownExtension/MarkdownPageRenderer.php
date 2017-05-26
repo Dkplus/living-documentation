@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Dkplus\LivingDocs\MarkdownExtension;
+namespace Dkplus\LivingDocumentation\MarkdownExtension;
 
-use Dkplus\LivingDocs\TwigExtension\TwigPageRenderer;
+use Dkplus\LivingDocumentation\TwigExtension\TwigPageRenderer;
 use InvalidArgumentException;
 use League\CommonMark\Block\Element\AbstractBlock;
 use League\CommonMark\Block\Renderer\BlockRendererInterface;
