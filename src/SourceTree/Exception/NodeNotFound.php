@@ -14,7 +14,7 @@ final class NodeNotFound extends RuntimeException
     /** @internal */
     public function __construct(Node $node)
     {
-        parent::__construct(sprintf('Node "%s" has not been added before', $node->name()));
+        parent::__construct('Node has not been added before');
         $this->node = $node;
     }
 

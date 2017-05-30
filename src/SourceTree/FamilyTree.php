@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Dkplus\LivingDocumentation\SourceTree;
 
-use Dkplus\LivingDocumentation\SourceTree\Exception\NodeAddedTwice;
+use Dkplus\LivingDocumentation\SourceTree\Exception\IllegalRelationship;
 use Dkplus\LivingDocumentation\SourceTree\Exception\NodeNotFound;
 use SplObjectStorage;
 use function array_map;
 use function array_merge;
 use function iterator_to_array;
 
-class FamilyTree
+class FamilyTree implements NodeHierarchy
 {
     /** @var Project */
     private $progenitor;
@@ -33,7 +33,8 @@ class FamilyTree
     public function adopt(Node $ancestor, Node $descendant): void
     {
         $this->assertIsFamilyMember($ancestor);
-        $this->assertIsNoFamilyMember($descendant);
+        $this->assertIsNoAncestorOf($descendant, $ancestor);
+        $this->assertIsNoSpouseOf($descendant, $ancestor);
 
         $this->nodeToSpouses[$descendant] = $this->nodeToSpouses[$ancestor]->adopt($descendant);
     }
@@ -41,7 +42,8 @@ class FamilyTree
     public function marry(Node $node, Node $partner): void
     {
         $this->assertIsFamilyMember($node);
-        $this->assertIsNoFamilyMember($partner);
+        $this->assertIsNoAncestorOf($partner, $node);
+        $this->assertIsNoDescendantOf($partner, $node);
 
         $this->nodeToSpouses[$node]->marry($partner);
         $this->nodeToSpouses[$partner] = $this->nodeToSpouses[$node];
@@ -54,10 +56,24 @@ class FamilyTree
         }
     }
 
-    private function assertIsNoFamilyMember(Node $node): void
+    private function assertIsNoAncestorOf(Node $node, Node $possibleDescendant): void
     {
-        if (isset($this->nodeToSpouses[$node])) {
-            throw new NodeAddedTwice($node);
+        if ($this->findAncestorsOf($possibleDescendant)->contains($node)) {
+            throw new IllegalRelationship($node, $possibleDescendant);
+        }
+    }
+
+    private function assertIsNoDescendantOf(Node $node, Node $possibleAncestor)
+    {
+        if ($this->findDescendantsOf($possibleAncestor)->contains($node)) {
+            throw new IllegalRelationship($node, $possibleAncestor);
+        }
+    }
+
+    private function assertIsNoSpouseOf(Node $node, Node $possibleSpouse)
+    {
+        if ($this->findSpousesOf($possibleSpouse)->contains($node)) {
+            throw new IllegalRelationship($node, $possibleSpouse);
         }
     }
 

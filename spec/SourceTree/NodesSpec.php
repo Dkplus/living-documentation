@@ -24,6 +24,12 @@ class NodesSpec extends ObjectBehavior
         $this->shouldImplement(Iterator::class);
     }
 
+    function its_Node_elements_are_always_unique(Node $first, Node $second)
+    {
+        $this->beConstructedWith($first, $first, $second, $first);
+        $this->shouldIterateAs([$first, $second]);
+    }
+
     function it_iterates_over_Nodes(Node $first, Node $second, Node $third)
     {
         $this->beConstructedWith($first, $second, $third);
@@ -40,8 +46,6 @@ class NodesSpec extends ObjectBehavior
 
     function it_can_create_new_instances_without_a_specific_Node(Node $contained, Node $notContained)
     {
-        $notContained->name()->willReturn('Node is not contained');
-
         $this->beConstructedWith($contained);
 
         $this->without($contained)->shouldNotBe($this);
@@ -52,13 +56,10 @@ class NodesSpec extends ObjectBehavior
 
     function it_can_create_new_instances_with_filtered_Nodes(Node $nodeA, Node $nodeB)
     {
-        $nodeA->name()->willReturn('A');
-        $nodeB->name()->willReturn('B');
-
         $this->beConstructedWith($nodeA, $nodeB);
 
-        $filter = function (Node $node) {
-            return $node->name() === 'B';
+        $filter = function (Node $node) use ($nodeB) {
+            return $node === $nodeB->getWrappedObject();
         };
 
         $this->filter($filter)->shouldNotBe($this);

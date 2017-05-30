@@ -10,6 +10,11 @@ use RuntimeException;
 
 class NodeNotFoundSpec extends ObjectBehavior
 {
+    function let(Node $node)
+    {
+        $this->beConstructedWith($node);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(NodeNotFound::class);
@@ -23,11 +28,5 @@ class NodeNotFoundSpec extends ObjectBehavior
     function it_relates_to_a_Node(Node $node)
     {
         $this->relatedTo()->shouldBe($node);
-    }
-
-    function its_message_contains_the_name_of_the_related_note(Node $node)
-    {
-        $node->name()->willReturn('Project');
-        $this->getMessage()->shouldContain('Project');
     }
 }

@@ -6,8 +6,10 @@ namespace Dkplus\LivingDocumentation\SourceTree;
 use ArrayIterator;
 use Dkplus\LivingDocumentation\SourceTree\Exception\NodeNotFound;
 use IteratorIterator;
+use const SORT_REGULAR;
 use function array_filter;
 use function array_search;
+use function array_unique;
 
 class Nodes extends IteratorIterator
 {
@@ -17,6 +19,7 @@ class Nodes extends IteratorIterator
     /** @internal */
     public function __construct(Node ...$nodes)
     {
+        $nodes = array_values(array_unique($nodes, SORT_REGULAR));
         parent::__construct(new ArrayIterator($nodes));
         $this->nodes = $nodes;
     }
