@@ -13,6 +13,11 @@ use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Trait_;
 use PhpParser\NodeVisitorAbstract;
+use function array_keys;
+use function array_pop;
+use function explode;
+use function implode;
+use function in_array;
 
 class NodeCollectingVisitor extends NodeVisitorAbstract
 {
@@ -76,12 +81,34 @@ class NodeCollectingVisitor extends NodeVisitorAbstract
 
     public function registerNodes(FamilyTree $nodes): void
     {
-        foreach ($this->packageToClassMap as $eachPackage => $classes) {
-            $package = new Package($eachPackage);
-            $nodes->adopt($nodes->progenitor(), $package);
+        $packageNames = array_keys($this->packageToClassMap);
+        asort($packageNames);
+        $packagesByName = [];
+        foreach ($packageNames as $eachPackageName) {
+            $parentPackageName = $this->searchParentPackage($eachPackageName, array_keys($packagesByName));
+            $eachPackage = new Package($eachPackageName);
+            $packagesByName[$eachPackageName] = $eachPackage;
+            if ($parentPackageName) {
+                $nodes->adopt($packagesByName[$parentPackageName], $eachPackage);
+                continue;
+            }
+            $nodes->adopt($nodes->progenitor(), $eachPackage);
+        }
+        foreach ($this->packageToClassMap as $eachPackageName => $classes) {
             foreach ($classes as $eachClass) {
-                $nodes->adopt($package, $eachClass);
+                $nodes->adopt($packagesByName[$eachPackageName], $eachClass);
             }
         }
+    }
+
+    private function searchParentPackage(string $packageName, array $packageNames): ?string
+    {
+        $packageParts = explode('\\', $packageName);
+        while (array_pop($packageParts) !== null) {
+            if (in_array(implode('\\', $packageParts), $packageNames)) {
+                return implode('\\', $packageParts);
+            }
+        }
+        return null;
     }
 }

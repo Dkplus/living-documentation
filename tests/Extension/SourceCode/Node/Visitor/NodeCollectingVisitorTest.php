@@ -13,6 +13,8 @@ use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
 use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\ClassWithoutDependencies;
+use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\OneInterface;
+use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\OneTrait;
 use function file_get_contents;
 
 /**
@@ -21,13 +23,35 @@ use function file_get_contents;
 class NodeCollectingVisitorTest extends TestCase
 {
     /** @test */
-    function it_collects_classes()
+    function it_collects_classes_as_ClassAlike()
     {
         $nodes = new FamilyTreeMock();
         $this->traverseFile(new File(__DIR__ . '/Fixtures/ClassWithoutDependencies.php'), $nodes);
         $this->assertHasAdopted($nodes, function ($argument) {
             return $argument instanceof ClassAlike
                 && $argument->name() === ClassWithoutDependencies::class;
+        });
+    }
+
+    /** @test */
+    function it_collects_interfaces_as_ClassAlike()
+    {
+        $nodes = new FamilyTreeMock();
+        $this->traverseFile(new File(__DIR__ . '/Fixtures/OneInterface.php'), $nodes);
+        $this->assertHasAdopted($nodes, function ($argument) {
+            return $argument instanceof ClassAlike
+                && $argument->name() === OneInterface::class;
+        });
+    }
+
+    /** @test */
+    function it_collects_traits_as_ClassAlike()
+    {
+        $nodes = new FamilyTreeMock();
+        $this->traverseFile(new File(__DIR__ . '/Fixtures/OneTrait.php'), $nodes);
+        $this->assertHasAdopted($nodes, function ($argument) {
+            return $argument instanceof ClassAlike
+                && $argument->name() === OneTrait::class;
         });
     }
 
@@ -87,6 +111,24 @@ class NodeCollectingVisitorTest extends TestCase
         $this->traverseFile(new File(__DIR__ . '/Fixtures/ClassWithExplicitSubpackageDeclaration.php'), $nodes);
 
         $this->assertHasAdopted($nodes, $nodes->progenitor(), function ($node) {
+            return $node instanceof Package
+                && $node->name() === 'Fixtures\\Subpackage';
+        });
+    }
+
+    /** @test */
+    function it_let_each_package_adopt_its_subpackages()
+    {
+        $nodes = new FamilyTreeMock();
+        $this->traverseFiles([
+            new File(__DIR__ . '/Fixtures/ClassWithExplicitPackageDeclaration.php'),
+            new File(__DIR__ . '/Fixtures/ClassWithExplicitSubpackageDeclaration.php'),
+        ], $nodes);
+
+        $this->assertHasAdopted($nodes, function ($node) {
+            return $node instanceof Package
+                && $node->name() === 'Fixtures';
+        }, function ($node) {
             return $node instanceof Package
                 && $node->name() === 'Fixtures\\Subpackage';
         });
