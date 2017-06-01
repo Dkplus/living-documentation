@@ -3,21 +3,25 @@ declare(strict_types=1);
 
 namespace Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor;
 
+use function array_merge;
 use Dkplus\LivingDocumentation\Extension\SourceCode\Node\ClassAlike;
 use Dkplus\LivingDocumentation\Extension\SourceCode\Node\File;
 use Dkplus\LivingDocumentation\Extension\SourceCode\Node\Package;
+use Dkplus\LivingDocumentation\SourceCodeExtension\CodeTraversing\PropertyVisitor;
 use Dkplus\LivingDocumentation\SourceTree\FamilyTree;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Trait_;
+use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 use function array_keys;
 use function array_pop;
 use function explode;
 use function implode;
 use function in_array;
+use function var_dump;
 
 class NodeCollectingVisitor extends NodeVisitorAbstract
 {
@@ -67,8 +71,25 @@ class NodeCollectingVisitor extends NodeVisitorAbstract
                 $package = $package . '\\' . $matches[1];
             }
 
+            $implementations = array_map('strval', (array) ($node->implements ?? []));
+            $extensions = $node->extends ?? [];
+            $extensions = array_map('strval', is_array($extensions) ? $extensions : [$extensions]);
+
+            $traitUsages = new TraitUsageVisitor();
+            $properties = new PropertyVisitor();
+            $traverser = new NodeTraverser();
+            $traverser->addVisitor($traitUsages);
+            $traverser->traverse([$node]);
+            $extensions = array_merge($extensions, $traitUsages->foundTraitUsages());
+
             $className = (string) $node->namespacedName ?? 'anonymous@' . spl_object_hash($node);
-            $class = new ClassAlike($className);
+            $class = new ClassAlike(
+                $className,
+                $package,
+                $implementations,
+                $extensions,
+                $properties->foundProperties()
+            );
             $this->packageToClassMap[$package][] = $class;
             $this->nodes->adopt($this->currentFile, $class);
         }

@@ -8,17 +8,22 @@ use Dkplus\LivingDocumentation\Extension\SourceCode\Node\File;
 use Dkplus\LivingDocumentation\Extension\SourceCode\Node\Package;
 use Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\NodeCollectingVisitor;
 use Dkplus\LivingDocumentation\SourceTree\FamilyTree;
+use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\ParserFactory;
 use PHPUnit\Framework\TestCase;
+use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\ClassWithMultipleProperties;
 use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\ClassWithoutDependencies;
+use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\InterfaceExtendingTwoInterfaces;
 use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\OneInterface;
 use test\Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\Fixtures\OneTrait;
 use function file_get_contents;
 
 /**
- * @covers NodeCollectingVisitor
+ * @covers \Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\NodeCollectingVisitor
+ * @covers \Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\MethodDependencyVisitor
+ * @covers \Dkplus\LivingDocumentation\Extension\SourceCode\Node\Visitor\TraitUsageVisitor
  */
 class NodeCollectingVisitorTest extends TestCase
 {
@@ -52,6 +57,56 @@ class NodeCollectingVisitorTest extends TestCase
         $this->assertHasAdopted($nodes, function ($argument) {
             return $argument instanceof ClassAlike
                 && $argument->name() === OneTrait::class;
+        });
+    }
+
+    /** @test */
+    function it_computes_the_implemented_interfaces_of_each_ClassAlike()
+    {
+        $nodes = new FamilyTreeMock();
+        $this->traverseFile(new File(__DIR__ . '/Fixtures/ClassImplementingTwoInterfaces.php'), $nodes);
+        $this->assertHasAdopted($nodes, function ($argument) {
+            return $argument instanceof ClassAlike
+                && $argument->implementations() === ['Traversable', 'Serializable'];
+        });
+    }
+
+    /** @test */
+    function it_computes_the_extended_classes_of_each_class()
+    {
+        $nodes = new FamilyTreeMock();
+        $this->traverseFile(new File(__DIR__ . '/Fixtures/ClassExtendingAnotherClass.php'), $nodes);
+        $this->assertHasAdopted($nodes, function ($argument) {
+            return $argument instanceof ClassAlike
+                && $argument->extensions() === ['stdClass', OneTrait::class];
+        });
+    }
+
+    /** @test */
+    function it_computes_the_extended_classes_of_each_interface()
+    {
+        $nodes = new FamilyTreeMock();
+        $this->traverseFile(new File(__DIR__ . '/Fixtures/InterfaceExtendingTwoInterfaces.php'), $nodes);
+        $this->assertHasAdopted($nodes, function ($argument) {
+            return $argument instanceof ClassAlike
+                && $argument->extensions() === [OneInterface::class, 'AnotherInterface'];
+        });
+    }
+
+    /** @test */
+    function it_recognizes_properties_of_ClassAlikes_as_associations()
+    {
+        $nodes = new FamilyTreeMock();
+        $this->traverseFile(new File(__DIR__ . '/Fixtures/ClassWithMultipleProperties.php'), $nodes);
+        $this->assertHasAdopted($nodes, function ($argument) {
+            return $argument instanceof ClassAlike
+                && $argument->associations() === [
+                    OneInterface::class,
+                    OneTrait::class,
+                    InterfaceExtendingTwoInterfaces::class,
+                    ClassWithMultipleProperties::class,
+                    Node::class
+                ];
         });
     }
 

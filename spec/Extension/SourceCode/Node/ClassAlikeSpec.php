@@ -11,7 +11,7 @@ class ClassAlikeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('stdClass');
+        $this->beConstructedWith('My\\Stdlib\\stdClass', 'My\\Stdlib', [], [], []);
     }
 
     function it_is_initializable()
@@ -26,6 +26,29 @@ class ClassAlikeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->name()->shouldBe('stdClass');
+        $this->name()->shouldBe('My\\Stdlib\\stdClass');
+    }
+
+    function it_has_a_package()
+    {
+        $this->package()->shouldBe('My\\Stdlib');
+    }
+
+    public function it_may_implement_some_interfaces()
+    {
+        $this->beConstructedWith('className', 'packageName', ['OneInterface']);
+        $this->implementations()->shouldBe(['OneInterface']);
+    }
+
+    public function it_may_extend_other_classes_or_interfaces()
+    {
+        $this->beConstructedWith('className', 'packageName', [], ['Foo\\Bar']);
+        $this->extensions()->shouldBe(['Foo\\Bar']);
+    }
+
+    public function it_may_has_associations_to_other_classes()
+    {
+        $this->beConstructedWith('className', 'packageName', [], [], ['Foo\\Bar']);
+        $this->associations()->shouldBe(['Foo\\Bar']);
     }
 }
